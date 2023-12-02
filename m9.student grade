@@ -1,0 +1,43 @@
+import java.util.Scanner;
+public class PerfectNumbers {
+    public static boolean isPerfectNumber(int number) {
+        if (number <= 1) {
+            return false;
+        }
+        int sum = 1; 
+        for (int i = 2; i <= Math.sqrt(number); i++) {
+            if (number % i == 0) {
+                sum += i;
+                if (i != number / i) {
+                    sum += number / i;
+                }
+            }
+        }
+        return sum == number;
+    }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        try {
+            System.out.print("Enter the value of n: ");
+            int n = scanner.nextInt();
+            if (n < 0) {
+                System.out.println("Please enter a non-negative integer.");
+                return;
+            }
+            System.out.print("First " + n + " perfect numbers are: ");
+            int count = 0;
+            int number = 1;
+            while (count < n) {
+                if (isPerfectNumber(number)) {
+                    System.out.print(number + " , ");
+                    count++;
+                }
+                number++;
+            }
+        } catch (java.util.InputMismatchException e) {
+            System.out.println("Invalid input. Please enter a valid integer.");
+        } finally {
+            scanner.close();
+        }
+    }
+}
