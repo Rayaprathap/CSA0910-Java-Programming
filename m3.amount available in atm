@@ -1,0 +1,31 @@
+import java.util.Scanner;
+public class ATM {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int[] denominations = {2000, 500, 200, 100};
+        int totalNotes, denomination, notes;
+        int totalBalance = 0;
+        try {
+            for (int i = 0; i < denominations.length; i++) {
+                System.out.print("Enter the " + (i + 1) + " Denomination: ");
+                denomination = scanner.nextInt();
+                if (denomination != denominations[i]) {
+                    System.out.println("Invalid denomination. Please enter the correct denomination.");
+                    return;
+                }
+                System.out.print("Enter the " + (i + 1) + " Denomination number of notes: ");
+                notes = scanner.nextInt();
+                if (notes < 0) {
+                    System.out.println("Invalid number of notes. Please enter a non-negative value.");
+                    return;
+                }
+                totalBalance += denomination * notes;
+            }
+            System.out.println("Total Available Balance in ATM: " + totalBalance);
+        } catch (java.util.InputMismatchException e) {
+            System.out.println("Invalid input. Please enter valid integers.");
+        } finally {
+            scanner.close();
+        }
+    }
+}
